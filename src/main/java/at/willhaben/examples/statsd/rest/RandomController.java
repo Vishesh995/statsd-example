@@ -11,12 +11,12 @@ import java.math.BigInteger;
  * @author Benjamin Hubert (benjamin.hubert@willhaben.at)
  */
 @RestController
-public class HeavyTaskController {
+public class RandomController {
 
     private final RandomService service;
 
     @Autowired
-    public HeavyTaskController(RandomService service) {
+    public RandomController(RandomService service) {
         this.service = service;
     }
 
