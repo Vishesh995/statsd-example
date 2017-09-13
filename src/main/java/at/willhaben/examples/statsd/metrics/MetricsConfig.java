@@ -5,11 +5,13 @@ import com.timgroup.statsd.StatsDClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author Benjamin Hubert (benjamin.hubert@willhaben.at)
  */
 @Configuration
+@EnableAspectJAutoProxy
 public class MetricsConfig {
 
     @Bean
@@ -19,6 +21,11 @@ public class MetricsConfig {
             @Value("${metrics.prefix:example.app}") String prefix
     ) {
         return new NonBlockingStatsDClient(prefix, host, port);
+    }
+
+    @Bean
+    public MethodProfiler methodProfiler(StatsDClient statsDClient) {
+        return new MethodProfiler(statsDClient);
     }
 
 }
